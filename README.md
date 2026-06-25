@@ -18,3 +18,15 @@
     - README is for the explanation of what the project is, how to run it, the observations and conclusions.
     - gitignore is the list of what to ignore before pushing on git so the repository stays clean and light
 - Modified the gitignore to ignore many things.
+
+
+#### 25/06/26
+
+- Added the dates and ETF tickers in the config.
+    - ^NDX is the BS underlying as QYLD (the etf we price) writes the call on the Nasdaq-100 index itself (European, cash-settle)
+    - QYLD is the ETF I'm pricing and my validation target. Myst be auto_adjust = False to not corrupt the premium/discount with monthly distribution and adjusted closes.
+    - ^VXN is the sigma for the BS formula. It's the 30-day implied vol. on the Nasdaq-100 which is exactly the option QYLD writes, so we get market implied vol. for free instead of buying option data (sigma = VXN/100).
+    - ^IRX is the risk-free rate (r=IRX/100). The risk-free input uses the 13-week T-bill discount yield directly; at one-month tenor the discount-basis and compounding conventions affect the option price below the level of one tick, so no conversion is applied.
+    - QQQ is sanity cross-check only. It confirms that ^NDX is behaving. Should not price off it.
+
+#### 
