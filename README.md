@@ -28,5 +28,10 @@
     - ^VXN is the sigma for the BS formula. It's the 30-day implied vol. on the Nasdaq-100 which is exactly the option QYLD writes, so we get market implied vol. for free instead of buying option data (sigma = VXN/100).
     - ^IRX is the risk-free rate (r=IRX/100). The risk-free input uses the 13-week T-bill discount yield directly; at one-month tenor the discount-basis and compounding conventions affect the option price below the level of one tick, so no conversion is applied.
     - QQQ is sanity cross-check only. It confirms that ^NDX is behaving. Should not price off it.
+    - Worked on the fetch.py file by doing the following:
+        - Function for the path of each ticker
+        - Function to fetch one ticket series
+        - Function to fetch all of the tickers using the fetch one function in a for loop
+
 
 #### 
