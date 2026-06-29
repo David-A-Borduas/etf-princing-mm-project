@@ -1,20 +1,14 @@
 from pathlib import Path
 
-def find_project_root(marker: str = "pyproject.toml") -> Path:
-    """Return the project root by climbing upward from this file until a directory
-    containing `marker` (e.g. pyproject.toml) is found. This anchors all paths to the
-    repo's location on disk rather than the working directory, so they resolve correctly
-    no matter where Python is run from. Raises FileNotFoundError if no marker is found."""
-    for parent in Path(__file__).parents:
-        if (parent / marker).exists():
-            return parent
-    raise FileNotFoundError(f"No {marker} found in any parent directory of {Path(__file__)}")
-
 # paths (to not have to hardcode paths everywhere)
-PROJECT_ROOT = find_project_root()
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
 PROCESSED_DIR = DATA_DIR / "processed"
+
+# Create directories if they don't exist
+RAW_DIR.mkdir(parents=True, exist_ok=True) # parents creates the whole path if it doesn't exist
+PROCESSED_DIR.mkdir(parents=True, exist_ok=True) # exists_ok=True means don't raise an error if the directory already exists and just do nothing
 
 # dates (includes COVID vol spike for stress testing)
 START_DATE = "2020-01-01"
@@ -26,6 +20,6 @@ ETF_TICKERS = {"^NDX": False, # Black-Scholes underlying. QYLD writes options on
 # The ^ prefix is Yahoo's convention for an index rather than a tradable security
     "QQQ": False, # A sanity cross-check only, never a pricing input. (Should no diverge from NDX)
     "QYLD": False, # The instrument and validation target.
-    "^VNX": False, # The implied-vol input (the sigma)
-    "IRX": False, # The risk-free rate input (the r). This is the 13-week (3-month) T-bill yield, which feeds the r in BS.
+    "^VXN": False, # The implied-vol input (the sigma)
+    "^IRX": False, # The risk-free rate input (the r). This is the 13-week (3-month) T-bill yield, which feeds the r in BS.
 }

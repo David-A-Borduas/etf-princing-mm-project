@@ -36,7 +36,7 @@ def fetch_one(ticker: str, *, auto_adjust: bool = False, start: str | None = Non
     df = yf.download(ticker, start=start, end=end, auto_adjust=auto_adjust, progress=False)
     # If the data is a MultiIndex, get the second level of the columns. Makes it robust across yfinance versions.
     if isinstance(df.columns, pd.MultiIndex):
-        df.colomns = df.columns.get_level_values(1)
+        df.columns = df.columns.get_level_values(0)
     # If the data is empty, raise an error.
     if df.empty:
         raise ValueError(f"No data found for {ticker} between {start} and {end}")

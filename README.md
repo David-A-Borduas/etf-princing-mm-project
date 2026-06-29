@@ -34,4 +34,14 @@
         - Function to fetch all of the tickers using the fetch one function in a for loop
 
 
+#### 28/06/26
+
+- Working on fetch and debugging
+- Had to write the command line : python -m src.data.fetch in order to be able to run the script fetch.py from the root.
+- Created the first notebook with the following cells:
+    - Imports and paths (to be able to load config.py and fetch.py from the notebook)
+    - Fetch data (using fetch_all function from fetch.py)
+    - Quick EDA (to observe the data, understand it, how it behaves and how complete and/or dirty it is)
+
+
 #### 
